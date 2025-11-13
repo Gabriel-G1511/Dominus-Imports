@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="dist/css/main.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<!-- Open Graph para redes sociais -->
+<meta property="og:title" content="Dominus Imports">
+<meta property="og:description" content="Produtos importados de alta qualidade">
+<meta property="og:image" content="src/img/Marca.jpeg">
+
     
 </head>
 <body>
@@ -48,18 +53,21 @@
         </div>
     </div>
     </nav>
+
+
+
     
 
-        <section class="sobre-nos">
-     <h2>Sobre Nós</h2>
-    <p>A <span class="Marca">Dominus Imports</span> é uma empresa especializada em <strong>importação e revenda de produtos de qualidade garantida</strong>. Trabalhamos com fornecedores selecionados, garantindo procedência, segurança e excelente custo-benefício em cada entrega.</p>
-    <p>Nosso foco é <strong>credibilidade e confiança</strong>. Atuamos com transparência, compromisso e seriedade para que cada cliente tenha a certeza de estar fazendo o melhor negócio.</p>
-    <p><em>Dominus Imports — trazendo o mundo até você, com confiança e excelência.</em></p>
-    </section>
+            <section class="sobre-nos">
+        <h2>Sobre Nós</h2>
+        <p>A <span class="Marca">Dominus Imports</span> é uma empresa especializada em <strong>importação e revenda de produtos de qualidade garantida</strong>. Trabalhamos com fornecedores selecionados, garantindo procedência, segurança e excelente custo-benefício em cada entrega.</p>
+        <p>Nosso foco é <strong>credibilidade e confiança</strong>. Atuamos com transparência, compromisso e seriedade para que cada cliente tenha a certeza de estar fazendo o melhor negócio.</p>
+        <p><em>Dominus Imports — trazendo o mundo até você, com confiança e excelência.</em></p>
+        </section>
 
-    <!-- Carousel -->
+        <!-- Carousel -->
 
-        <div id="carouselExampleIndicators" class="carousel slide">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -116,7 +124,7 @@
         <!-- Produto 3 -->
         <div class="col">
         <div class="card h-100 text-center border-0">
-            <img src="src/img//produto3.jpg" class="card-img-top p-4" alt="Produto 3" style="height:200px;object-fit:contain;">
+            <img src="src/img//produto3.webp" class="card-img-top p-4" alt="Produto 3" style="height:200px;object-fit:contain;">
             <div class="card-body">
             <h5 class="card-title" style="font-weight:600;">Nome do Produto</h5>
             <p class="card-text small text-muted">Destaque • Opções de cores</p>
@@ -138,8 +146,70 @@
     </div>
     </section>
 
-
+<!-- Adicione no final, antes do </body> -->
+<footer class="footer">
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-4">
+                <h5 class="Marca">Dominus Imports</h5>
+                <p>Trazendo o mundo até você, com confiança e excelência.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h6>Links Rápidos</h6>
+                <ul class="list-unstyled">
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Produtos</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h6>Contato</h6>
+                <p><i class="bi bi-envelope"></i> contato@dominusimports.com</p>
+                <p><i class="bi bi-phone"></i> (11) 99999-9999</p>
+            </div>
+        </div>
+        <div class="text-center py-3 border-top">
+            <small>© 2024 Dominus Imports. Todos os direitos reservados.</small>
+        </div>
+    </div>
+</footer>
 '
+
+<!-- Adicione antes do </body> -->
+<script>
+    // Navbar ao scrollar
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Lazy loading para imagens
+    document.addEventListener("DOMContentLoaded", function() {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+    });
+</script>
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>

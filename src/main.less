@@ -1,52 +1,703 @@
 @import "variaveis.less";
 
-body {
+// ========================================
+// RESET E BASE
+// ========================================
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
     font-family: 'Poppins', sans-serif;
     color: @corTexto;
-    background-color: @Fundo;
+    background-color: @corFundo;
+    overflow-x: hidden;
 }
 
+// ========================================
+// TIPOGRAFIA PREMIUM
+// ========================================
 h1, h2, h3, .Marca {
     font-family: 'Playfair Display', serif;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    color: @corDestaque;
+    font-weight: 700;
 }
 
-.navbar {
-    border-bottom: 2px solid fade(@corDestaque, 60%) !important;
-    background-color: @corFundo !important;
-    box-shadow: 0 2px 8px fade(@corDestaque, 20%) !important;
+// ========================================
+// MARCA COM EFEITO DOURADO LUXUOSO
+// ========================================
+.Marca {
+    background: @gradienteDourado;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    
+    // Sombra tripla dourada para profundidade
+    filter: drop-shadow(2px 2px 1px rgba(212, 175, 55, 0.3))
+            drop-shadow(0px 0px 8px rgba(212, 175, 55, 0.2))
+            drop-shadow(0px 4px 12px rgba(184, 148, 30, 0.25));
+    
+    // Brilho sutil
+    &::before {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background: @gradienteDourado;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: blur(10px);
+        opacity: 0.5;
+    }
+    
+    // Animação de brilho ao hover
+    &:hover {
+        animation: shine 1.5s ease-in-out infinite;
+    }
+}
 
-    .logo, .navbar-brand {
+@keyframes shine {
+    0%, 100% {
+        filter: drop-shadow(2px 2px 1px rgba(212, 175, 55, 0.3))
+                drop-shadow(0px 0px 8px rgba(212, 175, 55, 0.4))
+                drop-shadow(0px 4px 12px rgba(184, 148, 30, 0.25));
+    }
+    50% {
+        filter: drop-shadow(2px 2px 1px rgba(212, 175, 55, 0.5))
+                drop-shadow(0px 0px 15px rgba(212, 175, 55, 0.6))
+                drop-shadow(0px 4px 20px rgba(184, 148, 30, 0.4));
+    }
+}
+
+// ========================================
+// NAVBAR PREMIUM COM DOURADO
+// ========================================
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px) saturate(180%);
+    background: linear-gradient(to bottom, 
+                fade(@corFundo, 98%), 
+                fade(@corFundoSecundario, 95%)) !important;
+    border-bottom: 2px solid @corDestaque !important;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15),
+                0 1px 3px rgba(184, 148, 30, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1rem 0;
+    
+    &.scrolled {
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25),
+                    0 4px 12px rgba(184, 148, 30, 0.15) !important;
+        border-bottom-color: @corDestaque3 !important;
+    }
+
+    .navbar-brand {
         font-family: 'Playfair Display', serif;
         font-size: 1.8rem;
-        font-weight: 700;
-        color: @corDestaque !important;
+        font-weight: 900;
+        padding: 0.5rem 0;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            transform: scale(1.03);
+        }
     }
 
-    .menu a {
+    .nav-link {
+        color: @corTexto !important;
         font-weight: 500;
         font-size: 0.95rem;
+        position: relative;
+        padding: 0.5rem 1rem !important;
+        transition: all 0.3s ease;
+        
+        // Underline dourado
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: @gradienteDourado;
+            transition: width 0.3s ease;
+        }
+        
+        &:hover, &.active {
+            color: @corDestaque !important;
+            
+            &::after {
+                width: 80%;
+            }
+        }
+    }
+    
+    .btn-outline-warning {
+        border: 2px solid @corDestaque;
+        color: @corDestaque;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background: @gradienteDourado;
+            border-color: @corDestaque3;
+            color: @corFundo;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
     }
 }
 
+// ========================================
+// HERO SECTION DOURADA
+// ========================================
+.hero-section {
+    height: 65vh;
+    background: @corAzulEscuro;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    // Overlay com padrão dourado
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(244, 228, 193, 0.1) 0%, transparent 50%);
+        z-index: 1;
+    }
+    
+    // Padrão de pontos dourados animado
+    &::after {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background-image: 
+            radial-gradient(circle, rgba(212, 175, 55, 0.15) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: move 30s linear infinite;
+        z-index: 1;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: @corFundo;
+        padding: 2rem;
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        background: @gradienteDourado;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: none;
+        filter: drop-shadow(0 4px 20px rgba(212, 175, 55, 0.4));
+        letter-spacing: 2px;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        margin-bottom: 2.5rem;
+        color: @corDestaque2;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+    
+    .btn-hero {
+        background: @gradienteDourado;
+        color: @corAzulEscuro;
+        padding: 14px 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 3px solid @corDestaque3;
+        border-radius: 50px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        
+        &:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+            background: @gradienteDouradoEscuro;
+        }
+        
+        &:active {
+            transform: translateY(-2px) scale(1.03);
+        }
+    }
+}
+
+@keyframes move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+// ========================================
+// SEÇÃO SOBRE NÓS
+// ========================================
 .sobre-nos {
-    padding: 4rem 2rem;
-    max-width: 900px;
+    padding: 5rem 2rem;
+    max-width: 1000px;
     margin: 0 auto;
-    line-height: 1.8;
+    line-height: 1.9;
+    background: @gradienteDouradoSutil;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
 
     h2 {
         color: @corDestaque;
-        font-size: 2rem;
+        font-size: 2.5rem;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        position: relative;
+        
+        &::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: @gradienteDourado;
+            margin: 1.5rem auto;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+        }
     }
 
     p {
-        color: fade(@corTexto, 90%);
-        font-size: 1rem;
+        color: @corTexto;
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+        text-align: justify;
+        
+        strong {
+            color: @corDestaque3;
+            font-weight: 600;
+        }
+    }
+    
+    .Marca {
+        font-size: 1.1rem;
+    }
+    
+    em {
+        display: block;
+        text-align: center;
+        font-size: 1.1rem;
+        color: @corDestaque;
+        margin-top: 2rem;
+        font-style: italic;
+        font-weight: 500;
+    }
+}
+
+// ========================================
+// CAROUSEL COM DETALHES DOURADOS
+// ========================================
+.carousel {
+    margin: 3rem auto;
+    max-width: 1400px;
+    padding: 0 2rem;
+
+    .carousel-inner {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 50px rgba(212, 175, 55, 0.25),
+                    0 0 0 3px @corDestaque2;
+        border: 3px solid @corDestaque;
+    }
+
+    .carousel-item img {
+        height: 550px;
+        object-fit: cover;
+        filter: brightness(85%) contrast(105%);
+        transition: all 0.5s ease;
+        
+        &:hover {
+            filter: brightness(100%) contrast(100%);
+        }
+    }
+
+    .carousel-caption {
+        bottom: 10%;
+        left: 8%;
+        right: auto;
+        text-align: left;
+        background: linear-gradient(to right, 
+                    rgba(27, 43, 58, 0.85), 
+                    rgba(27, 43, 58, 0.3));
+        padding: 2rem 3rem;
+        border-radius: 15px;
+        border-left: 5px solid @corDestaque;
+        backdrop-filter: blur(5px);
+
+        h5 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: @gradienteDourado;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.5));
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: @corDestaque2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: none;
+        background-color: @corDestaque;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background-color: @corDestaque3;
+            transform: scale(1.1);
+        }
+    }
+
+    .carousel-indicators [data-bs-target] {
+        background-color: @corDestaque;
+        border: 2px solid @corDestaque3;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+        
+        &.active {
+            opacity: 1;
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+    }
+}
+
+// ========================================
+// CARDS DE PRODUTOS PREMIUM
+// ========================================
+.card {
+    border: 2px solid fade(@corDestaque, 30%) !important;
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, 
+                @corFundo 0%, 
+                fade(@corDestaque2, 15%) 100%);
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    
+    // Borda dourada brilhante
+    &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: @gradienteDourado;
+        border-radius: 15px;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.4s ease;
+    }
+    
+    &:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 15px 50px rgba(212, 175, 55, 0.35),
+                    0 0 0 3px @corDestaque2;
+        border-color: @corDestaque !important;
+        
+        &::before {
+            opacity: 0.3;
+        }
+    }
+    
+    .card-img-top {
+        background: linear-gradient(135deg, 
+                    fade(@corDestaque2, 20%), 
+                    fade(@corDestaque, 10%));
+        transition: all 0.4s ease;
+        padding: 2rem;
+    }
+    
+    &:hover .card-img-top {
+        transform: scale(1.08) rotate(2deg);
+    }
+    
+    .card-title {
+        color: @corDestaque3;
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-text {
+        color: @corTextoClaro;
+    }
+    
+    .btn-outline-dark {
+        border: 2px solid @corDestaque;
+        background: transparent;
+        color: @corDestaque;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        border-radius: 25px;
+        padding: 0.6rem 1.5rem;
+        
+        &:hover {
+            background: @gradienteDourado;
+            border-color: @corDestaque3;
+            color: @corAzulEscuro;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+    }
+}
+
+// Animação de entrada
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.8s ease-out backwards;
+    
+    &:nth-child(1) { animation-delay: 0.1s; }
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.3s; }
+    &:nth-child(4) { animation-delay: 0.4s; }
+}
+
+// ========================================
+// DROPDOWN MENU DOURADO
+// ========================================
+.dropdown-menu {
+    background-color: @corFundo;
+    border: 2px solid @corDestaque !important;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+    padding: 0.5rem 0;
+
+    a.dropdown-item {
+        color: @corTexto;
+        padding: 0.7rem 1.5rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        
+        &:hover {
+            background: linear-gradient(to right, 
+                        fade(@corDestaque, 20%), 
+                        fade(@corDestaque2, 10%));
+            color: @corDestaque3;
+            padding-left: 2rem;
+        }
+    }
+}
+
+// ========================================
+// FOOTER ELEGANTE
+// ========================================
+.footer {
+    background: linear-gradient(to bottom, 
+                @corAzulEscuro 0%, 
+                darken(@corAzulEscuro, 5%) 100%);
+    color: @corDestaque2;
+    border-top: 3px solid @corDestaque;
+    box-shadow: 0 -5px 20px rgba(212, 175, 55, 0.2);
+    padding: 3rem 0 1rem;
+    
+    h5, h6 {
+        color: @corDestaque;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    }
+    
+    a {
+        color: @corDestaque2;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: @gradienteDourado;
+            transition: width 0.3s ease;
+        }
+        
+        &:hover {
+            color: @corDestaque;
+            
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+    
+    .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        background: fade(@corDestaque, 15%);
+        border: 2px solid @corDestaque;
+        border-radius: 50%;
+        margin-right: 1rem;
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+        
+        &::after {
+            display: none;
+        }
+        
+        &:hover {
+            background: @gradienteDourado;
+            color: @corAzulEscuro;
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+    }
+    
+    .border-top {
+        border-color: fade(@corDestaque, 30%) !important;
+        margin-top: 2rem;
+    }
+    
+    small {
+        color: fade(@corDestaque2, 70%);
+    }
+}
+
+// ========================================
+// SEÇÕES COM PADRÃO ALTERNADO
+// ========================================
+section {
+    padding: 5rem 0;
+    
+    &:nth-child(even) {
+        background: linear-gradient(to bottom, 
+                    @corFundo, 
+                    fade(@corDestaque2, 8%), 
+                    @corFundo);
+    }
+}
+
+// ========================================
+// TÍTULOS DE SEÇÃO COM DETALHE DOURADO
+// ========================================
+h2 {
+    position: relative;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background: @gradienteDourado;
+        border-radius: 2px;
+        box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5);
+    }
+    
+    // Detalhe lateral
+    &::before {
+        content: '◆';
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        transform: translateX(-50%);
+        color: @corDestaque;
+        font-size: 0.8rem;
+    }
+}
+
+// ========================================
+// RESPONSIVIDADE
+// ========================================
+@media (max-width: 768px) {
+    .Marca {
+        font-size: 1.4rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .carousel-item img {
+        height: 350px;
+    }
+    
+    .carousel-caption {
+        left: 5%;
+        right: 5%;
+        padding: 1.5rem;
+        
+        h5 {
+            font-size: 1.8rem;
+        }
+    }
+    
+    h2 {
+        font-size: 2rem;
     }
 }
