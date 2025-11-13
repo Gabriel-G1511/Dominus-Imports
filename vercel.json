@@ -9,4 +9,4 @@
   "buildCommand": "npx grunt less && npx grunt cssmin",
   "outputDirectory": ".",
   "cleanUrls": true
-}
+} 
