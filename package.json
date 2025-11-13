@@ -2,9 +2,8 @@
   "name": "dominus-imports",
   "version": "1.0.0",
   "description": "Site institucional da Dominus Imports",
-  "main": "index.html",
   "scripts": {
-    "build": "grunt less && grunt cssmin && mkdir -p dist/css && cp index.html dist/index.html && cp -r src dist/src && cp src/css/main.min.css dist/css/main.min.css",
+    "build": "grunt less && grunt cssmin && mkdir -p dist/css dist/src && cp index.html dist/index.html && cp -r src/img dist/src/img && cp dist/css/main.min.css dist/css/main.min.css",
     "start": "grunt watch"
   },
   "dependencies": {
