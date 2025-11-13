@@ -4,7 +4,7 @@
   "description": "Site institucional da Dominus Imports",
   "main": "index.html",
   "scripts": {
-    "build": "grunt less && grunt cssmin",
+    "build": "grunt less && grunt cssmin && mkdir -p dist && cp index.html dist/index.html && cp -r src dist/",
     "start": "grunt watch"
   },
   "dependencies": {
