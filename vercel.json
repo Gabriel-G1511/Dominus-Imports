@@ -1,12 +1,9 @@
 {
-  "builds": [ 
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    }
-]
-  {
-  "buildCommand": "npx grunt less && npx grunt cssmin",
-  "outputDirectory": ".",
-  "cleanUrls": true
-} 
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/dist/(.*)", "dest": "/dist/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
