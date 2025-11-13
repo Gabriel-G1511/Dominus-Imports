@@ -1,4 +1,12 @@
 {
+  "name": "dominus-imports",
+  "version": "1.0.0",
+  "description": "Site institucional da Dominus Imports",
+  "main": "index.html",
+  "scripts": {
+    "build": "grunt less && grunt cssmin",
+    "start": "grunt watch"
+  },
   "dependencies": {
     "bootstrap": "^5.3.8",
     "less": "^4.4.2",
